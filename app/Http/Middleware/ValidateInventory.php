@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ValidateInventory
 {
@@ -29,7 +30,7 @@ class ValidateInventory
     public function rules($request)
 	{
         $mrules=[];
-        if($request->fullUrl().contains("add")){
+        if(Str::contains($request->fullUrl(), 'add')){
             $mrules=	 [
                 'name' => 'required|max:255',
                 'quantity' => 'required|Integer',
@@ -38,7 +39,8 @@ class ValidateInventory
     
             ];
         }
-        else if($request->fullUrl().contains("update")){
+        
+        else if(Str::contains($request->fullUrl(), 'update')){
             $mrules=	 [
                 'id' => 'required|Integer',
                 'name' => 'max:255',
@@ -48,7 +50,7 @@ class ValidateInventory
     
             ];  
         }
-        else if($request->fullUrl().contains("delete")){
+        else if(Str::contains($request->fullUrl(), 'delete')){
             $mrules=	 [
                 'id' => 'required|Integer',
             ];  

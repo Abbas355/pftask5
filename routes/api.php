@@ -20,10 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::post('/add', [InventoryController::class, 'addInventory'])->middleware(ValidateInventory::class);
-// Route::get('/read/{id?}',[InventoryController::class,'readInventory',]);
-// Route::post('/update',[InventoryController::class,'updateInventory',]);
-// Route::post('/delete',[InventoryController::class,'delete',]);
+
 
 Route::prefix('inventory')->controller(InventoryController::class)->middleware(ValidateInventory::class)->group(function () {
     Route::post('/add',  'addInventory');
